@@ -16,6 +16,7 @@ RUN \
   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false zip git && \
   yarn cache clean && \
   sed -i 's/"type": "ghost"/"type": "password"/' /ghost/core/server/config/env/config.development.json && \
+  sed -i 's/"http://localhost:": "http://nightshift.tk:"/' /ghost/core/server/config/env/config.development.json && \
   rm -rf /tmp/npm* && \
   
 chown -R ghost:ghost /ghost 
