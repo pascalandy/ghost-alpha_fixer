@@ -1,11 +1,3 @@
-#
-# Ghost Dockerfile
-#
-# https://github.com/dockerfile/ghost
-#
-
-# Pull base image.
-#FROM dockerfile/nodejs
 FROM node:boron-slim
 
 SHELL ["/bin/bash", "-c"]
@@ -111,8 +103,8 @@ cat $DIR_INTO/package.json | grep "version";
 # I had issues with Ghost being "sleepy". I had to refresh the blog 2 times 
 # before it response. With this it fix it like a boss.
 ##############################################################################
-HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
-CMD curl --fail http://localhost:2368/$ENV_2ND_URL_BLOG/ || exit 1
+#HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
+#CMD curl --fail http://localhost:2368/$ENV_2ND_URL_BLOG/ || exit 1
 
 # Expose ports.
 EXPOSE 2368
@@ -122,5 +114,5 @@ CMD ["bash", "/ghost-start"]
 CMD ["sh", "-c", "chown -R ghost:ghost /ghost"]
 
 USER ghost
-CMD ["sh", "-c", "NODE_ENV=${NODE_ENV:-production} PORT=$PORT npm start"]
-#CMD ["sh", "-c", "server__host=0.0.0.0 server__port=$PORT npm start"]
+#CMD ["sh", "-c", "NODE_ENV=${NODE_ENV:-production} PORT=$PORT npm start"]
+CMD ["sh", "-c", "server__host=0.0.0.0 server__port=$PORT npm start"]
